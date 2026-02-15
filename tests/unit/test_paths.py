@@ -42,7 +42,7 @@ class TestPathUtilities:
         monkeypatch.chdir(temp_dir)
         result = ensure_output_dir("output")
 
-        assert result == temp_dir / "output"
+        assert result.resolve() == (temp_dir / "output").resolve()
         assert result.exists()
 
     def test_normalize_path_windows(self, monkeypatch):

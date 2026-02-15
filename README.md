@@ -219,6 +219,16 @@ Install ffmpeg:
 - **Ubuntu/Debian**: `sudo apt install ffmpeg`
 - **Windows**: Download from [ffmpeg.org](https://ffmpeg.org/download.html)
 
+## Troubleshooting
+
+See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for solutions to common issues:
+- ffmpeg not found
+- Permission denied errors
+- Invalid format errors
+- Python version errors
+- Module not found errors
+
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on:
