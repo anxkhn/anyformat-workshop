@@ -178,6 +178,114 @@ anyformat video gif video.mp4 --duration 5 --fps 15
 
 ### Audio Commands
 
+#### Convert Audio
+
+Convert between audio formats with quality presets:
+
+```bash
+# Convert WAV to MP3 with high quality (320k bitrate)
+anyformat audio convert input.wav output.mp3 --quality high
+
+# Convert to FLAC (lossless)
+anyformat audio convert input.mp3 output.flac --quality high
+
+# Custom bitrate
+anyformat audio convert input.wav output.mp3 --bitrate 256k
+```
+
+Console output:
+```
+⠴ Converting audio... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Success: Converted input.wav to output.mp3
+```
+
+#### Trim Audio
+
+Extract a portion of an audio file:
+
+```bash
+# Extract from 10s to 30s (20 seconds total)
+anyformat audio trim audio.mp3 10.0 30.0
+
+# Output: audio_trimmed.mp3
+```
+
+#### Merge Audio Files
+
+Combine multiple audio tracks:
+
+```bash
+# Merge two tracks
+anyformat audio merge track1.mp3 track2.mp3 --output merged.mp3
+
+# Merge with crossfade (500ms)
+anyformat audio merge track1.mp3 track2.mp3 --crossfade 500
+```
+
+#### Normalize Audio
+
+Adjust volume levels to a target dB:
+
+```bash
+# Normalize to -20 dB (broadcast standard)
+anyformat audio normalize audio.mp3 --target -20.0
+
+# Normalize to -14 dB (streaming standard)
+anyformat audio normalize audio.mp3 --target -14.0
+```
+
+#### Split Audio
+
+Split long audio into chunks:
+
+```bash
+# Split podcast into 60-second chunks
+anyformat audio split podcast.mp3 60 --output ./chunks
+
+# Output: chunks/podcast_part001.mp3, podcast_part002.mp3, etc.
+```
+
+#### Adjust Volume
+
+Increase or decrease volume:
+
+```bash
+# Increase volume by 5 dB
+anyformat audio volume audio.mp3 +5.0
+
+# Decrease volume by 3 dB
+anyformat audio volume audio.mp3 -3.0 --output quieter.mp3
+```
+
+#### Audio Information
+
+Display metadata about an audio file:
+
+```bash
+anyformat audio info audio.mp3
+```
+
+Console output:
+```
+Audio Information
+  File: audio.mp3
+  Duration: 245.67 seconds
+  Channels: 2
+  Sample Rate: 44100 Hz
+  Sample Width: 16 bits
+  File Size: 4,892,341 bytes
+```
+
+### Audio Quality Presets
+
+| Preset | MP3 Bitrate | Use Case |
+|--------|-------------|----------|
+| low    | 128k        | Small file size, acceptable quality |
+| medium | 192k        | Balanced quality / size |
+| high   | 320k        | Maximum quality |
+
+
+
 ```bash
 # Convert audio
 anyformat audio convert input.wav output.mp3 --quality high

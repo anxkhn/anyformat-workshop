@@ -5,6 +5,7 @@ from typing import Optional
 
 import typer
 from PIL import Image
+from anyformat.utils.constants import IMAGE_QUALITY_PRESETS as QUALITY_PRESETS
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
@@ -22,11 +23,6 @@ SUPPORTED_FORMATS = {
     "ico": "ICO",
 }
 
-QUALITY_PRESETS = {
-    "low": {"quality": 60, "optimize": True},
-    "medium": {"quality": 80, "optimize": True},
-    "high": {"quality": 95, "optimize": False},
-}
 
 
 @app.command("convert")

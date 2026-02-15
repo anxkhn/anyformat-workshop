@@ -10,17 +10,13 @@ from pydub import AudioSegment
 from pydub.effects import normalize
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
+from anyformat.utils.constants import AUDIO_QUALITY_PRESETS as QUALITY_PRESETS
 
 app = typer.Typer(help="Audio conversion commands")
 console = Console()
 
 SUPPORTED_FORMATS = ["mp3", "wav", "ogg", "flac", "aac", "m4a", "wma"]
 
-QUALITY_PRESETS = {
-    "low": {"bitrate": "128k"},
-    "medium": {"bitrate": "192k"},
-    "high": {"bitrate": "320k"},
-}
 
 
 def _check_ffmpeg() -> bool:

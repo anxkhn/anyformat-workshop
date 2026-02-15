@@ -6,6 +6,7 @@ from typing import Optional
 
 import ffmpeg
 import typer
+from anyformat.utils.constants import VIDEO_QUALITY_PRESETS as QUALITY_PRESETS
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
@@ -14,11 +15,6 @@ console = Console()
 
 SUPPORTED_FORMATS = ["mp4", "webm", "mkv", "avi", "mov", "gif"]
 
-QUALITY_PRESETS = {
-    "low": {"crf": 28, "preset": "faster"},
-    "medium": {"crf": 23, "preset": "medium"},
-    "high": {"crf": 18, "preset": "slow"},
-}
 
 CODEC_MAP = {
     "mp4": {"video": "libx264", "audio": "aac"},
