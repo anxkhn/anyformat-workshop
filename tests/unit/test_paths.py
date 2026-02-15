@@ -42,7 +42,7 @@ class TestPathUtilities:
         monkeypatch.chdir(temp_dir)
         result = ensure_output_dir("output")
 
-        assert result == temp_dir / "output"
+        assert result.resolve() == (temp_dir / "output").resolve()
         assert result.exists()
 
     def test_normalize_path_windows(self, monkeypatch):
@@ -141,3 +141,39 @@ class TestPathUtilities:
         """Test that empty/whitespace filename gets default."""
         result = sanitize_filename("   ")
         assert result == "unnamed"
+
+# Edge case tests for sanitize_filename (Issue #8)
+    def test_sanitize_filename_with_emoji(self, monkeypatch):
+        result = sanitize_filename("file😀name.txt")
+        assert result != ""
+
+
+    # Edge case tests for sanitize_filename (Issue #8)
+    def test_sanitize_filename_emoji(self, monkeypatch):
+        """Test emoji characters."""
+        result = sanitize_filename("file😀name.txt")
+        assert result != ""
+        assert ".txt" in result
+
+    def test_sanitize_filename_chinese(self, monkeypatch):
+        """Test Chinese characters."""
+        result = sanitize_filename("文件名称.txt")
+        assert ".txt" in result
+
+    def test_sanitize_filename_arabic(self, monkeypatch):
+        """Test Arabic characters."""
+        result = sanitize_filename("ملف.txt")
+        assert ".txt" in result
+
+    def test_sanitize_filename_long(self, monkeypatch):
+        """Test very long filename."""
+        long_name = "a" * 300 + ".txt"
+        result = sanitize_filename(long_name)
+        assert ".txt" in result
+
+    def test_sanitize_filename_multiple_invalid(self, monkeypatch):
+        """Test multiple consecutive invalid chars."""
+        monkeypatch.setattr(platform, "system", lambda: "Windows")
+        result = sanitize_filename("file<<<>>>.txt")
+        assert "<" not in result
+        assert ">" not in result
