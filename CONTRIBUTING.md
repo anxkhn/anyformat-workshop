@@ -89,7 +89,7 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 | `fix` | Bug fix |
 | `docs` | Documentation only |
 | `style` | Code style (formatting, etc.) |
-| `refactor` | Code refactoring |
+| `refactor` | Code refactoring without changing behavior |
 | `test` | Adding or fixing tests |
 | `chore` | Maintenance tasks |
 
