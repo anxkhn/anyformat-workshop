@@ -19,7 +19,7 @@ By contributing to this project, you will learn:
 
 1. **Git & GitHub workflows** - Forking, branching, commits, pull requests
 2. **Python packaging** - Modern pyproject.toml with uv package manager
-3. **CLI development** - Typer framework with Rich for terminal output
+3. **CLI development** - [Typer](https://typer.tiangolo.com/) framework with [Rich](https://rich.readthedocs.io/) for terminal output
 4. **Media processing** - Image (Pillow), Video (ffmpeg), Audio (pydub)
 5. **Testing** - pytest with fixtures and coverage
 6. **Code quality** - Linting, type hints, documentation
