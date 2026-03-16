@@ -179,21 +179,46 @@ anyformat video gif video.mp4 --duration 5 --fps 15
 ### Audio Commands
 
 ```bash
-# Convert audio
+# Convert audio format (WAV to MP3)
 anyformat audio convert input.wav output.mp3 --quality high
+# Output:
+# ✓ Converting input.wav → output.mp3
+# ✓ Quality: high (320kbps)
+# ✓ Completed in 2.3s
 
-# Trim audio
-anyformat audio trim audio.mp3 10.0 30.0
+# Trim audio (extract 20 seconds starting at 10s)
+anyformat audio trim podcast.mp3 10.0 30.0
+# Output:
+# ✓ Trimming podcast.mp3
+# ✓ Start: 10.0s | End: 30.0s
+# ✓ Saved to podcast_trimmed.mp3
 
-# Merge audio files
+# Merge multiple audio files
 anyformat audio merge track1.mp3 track2.mp3 --output merged.mp3
+# Output:
+# ✓ Merging 2 audio files
+# ✓ track1.mp3 (3:24)
+# ✓ track2.mp3 (2:15)
+# ✓ Total duration: 5:39
 
-# Normalize audio
+# Normalize audio volume
 anyformat audio normalize audio.mp3 --target -20.0
+# Output:
+# ✓ Normalizing audio.mp3
+# ✓ Target level: -20.0 dB
+# ✓ Peak adjusted from -12.3 dB to -20.0 dB
 
-# Split audio
+# Split audio into chunks (60 second segments)
 anyformat audio split podcast.mp3 60 --output ./chunks
+# Output:
+# ✓ Splitting podcast.mp3into 60s chunks
+# ✓ Created 8 segments in ./chunks/
 ```
+
+**Quality Options:**
+- `high`: 320kbps (best quality, larger file)
+- `medium`: 192kbps (balanced)
+- `low`: 128kbps (smaller file, lower quality)
 
 ### General Commands
 
