@@ -8,6 +8,8 @@ from PIL import Image
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
+from anyformat.utils.constants import IMAGE_QUALITY_PRESETS
+
 app = typer.Typer(help="Image conversion commands")
 console = Console()
 
