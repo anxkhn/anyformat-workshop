@@ -24,11 +24,6 @@ SUPPORTED_FORMATS = {
     "ico": "ICO",
 }
 
-QUALITY_PRESETS = {
-    "low": {"quality": 60, "optimize": True},
-    "medium": {"quality": 80, "optimize": True},
-    "high": {"quality": 95, "optimize": False},
-}
 
 
 @app.command("convert")
@@ -75,7 +70,7 @@ def convert(
                 progress.update(task, advance=20)
 
             save_kwargs = {"format": SUPPORTED_FORMATS[output_format]}
-            save_kwargs.update(QUALITY_PRESETS.get(quality, QUALITY_PRESETS["medium"]))
+            save_kwargs.update(IMAGE_QUALITY_PRESETS.get(quality, IMAGE_QUALITY_PRESETS["medium"]))
 
             if output_format in ["jpg", "jpeg"]:
                 if img.mode in ("RGBA", "P"):
@@ -275,7 +270,7 @@ def batch_convert(
                 img = Image.open(img_file)
 
                 save_kwargs = {"format": SUPPORTED_FORMATS[format]}
-                save_kwargs.update(QUALITY_PRESETS.get(quality, QUALITY_PRESETS["medium"]))
+                save_kwargs.update(IMAGE_QUALITY_PRESETS.get(quality, IMAGE_QUALITY_PRESETS["medium"]))
 
                 if format in ["jpg", "jpeg"] and img.mode in ("RGBA", "P"):
                     img = img.convert("RGB")
