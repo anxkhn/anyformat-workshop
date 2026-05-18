@@ -11,6 +11,8 @@ from pydub.effects import normalize
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
+from anyformat.utils.constants import AUDIO_QUALITY_PRESETS
+
 app = typer.Typer(help="Audio conversion commands")
 console = Console()
 
