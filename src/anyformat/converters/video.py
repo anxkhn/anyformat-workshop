@@ -9,16 +9,12 @@ import typer
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
+from anyformat.utils.constants import VIDEO_QUALITY_PRESETS
+
 app = typer.Typer(help="Video conversion commands")
 console = Console()
 
 SUPPORTED_FORMATS = ["mp4", "webm", "mkv", "avi", "mov", "gif"]
-
-QUALITY_PRESETS = {
-    "low": {"crf": 28, "preset": "faster"},
-    "medium": {"crf": 23, "preset": "medium"},
-    "high": {"crf": 18, "preset": "slow"},
-}
 
 CODEC_MAP = {
     "mp4": {"video": "libx264", "audio": "aac"},
@@ -56,7 +52,7 @@ def convert(
         console.print(f"Supported formats: {', '.join(SUPPORTED_FORMATS)}")
         raise typer.Exit(1)
 
-    preset = QUALITY_PRESETS.get(quality, QUALITY_PRESETS["medium"])
+    preset = VIDEO_QUALITY_PRESETS.get(quality, VIDEO_QUALITY_PRESETS["medium"])
     video_codec = codec or CODEC_MAP.get(output_format, {}).get("video", "libx264")
     audio_codec_val = audio_codec or CODEC_MAP.get(output_format, {}).get("audio", "aac")
 
@@ -121,7 +117,7 @@ def compress(
         output_file = Path(output_path)
 
     try:
-        preset = QUALITY_PRESETS.get(quality, QUALITY_PRESETS["medium"])
+        preset = VIDEO_QUALITY_PRESETS.get(quality, VIDEO_QUALITY_PRESETS["medium"])
 
         stream = ffmpeg.input(str(input_file))
         stream = ffmpeg.output(
