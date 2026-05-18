@@ -18,11 +18,6 @@ console = Console()
 
 SUPPORTED_FORMATS = ["mp3", "wav", "ogg", "flac", "aac", "m4a", "wma"]
 
-QUALITY_PRESETS = {
-    "low": {"bitrate": "128k"},
-    "medium": {"bitrate": "192k"},
-    "high": {"bitrate": "320k"},
-}
 
 
 def _check_ffmpeg() -> bool:
@@ -63,7 +58,7 @@ def convert(
         console.print(f"Supported formats: {', '.join(SUPPORTED_FORMATS)}")
         raise typer.Exit(1)
 
-    preset = QUALITY_PRESETS.get(quality, QUALITY_PRESETS["medium"])
+    preset = AUDIO_QUALITY_PRESETS.get(quality, AUDIO_QUALITY_PRESETS["medium"])
     final_bitrate = bitrate or preset["bitrate"]
 
     try:
