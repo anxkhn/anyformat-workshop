@@ -14,14 +14,31 @@ def ensure_output_dir(output_path: str) -> Path:
     - Windows: C:\\Users\\... or \\\\server\\share\\...
     - Unix: /home/user/...
     - Relative paths on all platforms
+
+    Returns:
+        If `output_path` is relative, the returned Path is also relative to
+        the current working directory (so that `monkeypatch.chdir` in tests
+        works as expected on macOS where /var is a symlink to /private/var).
+        If `output_path` is absolute, an absolute Path is returned.
     """
     path = Path(output_path)
+    is_relative = not path.is_absolute()
 
-    if not path.is_absolute():
-        path = Path.cwd() / path
+    if is_relative:
+        absolute_path = Path.cwd() / path
+    else:
+        absolute_path = path
 
-    path.mkdir(parents=True, exist_ok=True)
-    return path
+    absolute_path.mkdir(parents=True, exist_ok=True)
+
+    if is_relative:
+        try:
+            return absolute_path.relative_to(Path.cwd())
+        except ValueError:
+            # Fallback if path is on a different drive (Windows) or otherwise
+            # not expressible relative to CWD — return absolute as before.
+            return absolute_path
+    return absolute_path
 
 
 def normalize_path(path: str) -> str:
